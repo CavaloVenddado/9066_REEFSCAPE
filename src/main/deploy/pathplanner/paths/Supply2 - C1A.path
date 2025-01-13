@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.1,
+        "y": 1.07
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.694734589041095,
+        "y": 1.0424015410958907
+      },
+      "isLocked": false,
+      "linkedName": "Supply2"
+    },
+    {
+      "anchor": {
+        "x": 5.155,
+        "y": 5.175
+      },
+      "prevControl": {
+        "x": 7.873458904109588,
+        "y": 5.024208047945206
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "C1"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -119.99999999999999
+  },
+  "reversed": false,
+  "folder": "Supply2",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -126.0
+  },
+  "useDefaultConstraints": true
+}

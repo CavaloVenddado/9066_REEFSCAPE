@@ -6,9 +6,8 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
 
 import edu.wpi.first.math.MathUtil;
 
@@ -36,12 +35,20 @@ public class RobotContainer {
   CommandXboxController driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
   CommandJoystick SecondController = new CommandJoystick(OIConstants.kSecondControllerPort);
 
+  RobotConfig config;{
+  try{
+    config = RobotConfig.fromGUISettings();
+  } catch (Exception e) {
+    // Handle exception as needed
+    e.printStackTrace();}
+  }
+
   public RobotContainer() {
     AutoBuilder.configure(
         drive::getPose,
         drive::resetOdometry,
         drive::getSpeeds,
-        (speeds) -> {
+        (speeds, feedfowards) -> {
           drive.drive(
               speeds.vxMetersPerSecond / DriveConstants.kMaxSpeedMetersPerSecond,
               speeds.vyMetersPerSecond / DriveConstants.kMaxSpeedMetersPerSecond,
@@ -49,13 +56,12 @@ public class RobotContainer {
               false,
               false);
         },
-        new HolonomicPathFollowerConfig(
-            new PIDConstants(5.0),
-            new PIDConstants(5),
-            DriveConstants.kMaxSpeedMetersPerSecond,
-            0.417193,
-            new ReplanningConfig(false, false)),
-
+        new PPHolonomicDriveController(
+          new PIDConstants(5.0),
+          new PIDConstants(5),
+          0.417193
+        ),
+        config,
         () -> {
           
           var alliance = DriverStation.getAlliance();
